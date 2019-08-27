@@ -9,9 +9,9 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>spring-boot-multi-datasourse-jta-atomikos</artifactId>
+    <artifactId>spring-boot-multi-datasourse</artifactId>
 
-    <description>使用JTA-ATOMIKOS实现的多数据源事务管理</description>
+    <description>多数据源</description>
 
     <dependencies>
         <dependency>
@@ -34,5 +34,14 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
+
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.2</version>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
+
 </project>

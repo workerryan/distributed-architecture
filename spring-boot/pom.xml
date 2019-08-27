@@ -16,6 +16,7 @@
     <description>Spring Boot相关代码</description>
     <modules>
         <module>spring-boot-multi-datasourse-jta-atomikos</module>
+        <module>spring-boot-multi-datasourse</module>
     </modules>
 
 </project>
