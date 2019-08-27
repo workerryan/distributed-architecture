@@ -11,12 +11,25 @@
 
     <artifactId>spring-boot-multi-datasourse-jta-atomikos</artifactId>
 
-    <description>使用JTA-ATOMIKOS实现的多数据源事务管理</description>
+    <description>
+        使用JTA-ATOMIKOS实现的多数据源事务管理，一般是应用于传统行业，传统的JTA分布式解决方案。
+        它的缺点是要拿到所有的数据源，然后注册到同一个全局事务中，在微服务场景下，是不可能会拿到所有的数据源的。
+    </description>
 
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jta-atomikos</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
         </dependency>
 
         <dependency>
@@ -33,6 +46,13 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.2</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 </project>
