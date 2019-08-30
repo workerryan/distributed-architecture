@@ -18,6 +18,8 @@
         <module>spring-boot-multi-datasourse-jta-atomikos</module>
         <module>spring-boot-multi-datasourse</module>
         <module>spring-boot-manual-myself</module>
+        <module>spring-boot-security</module>
+        <module>spring-boot-security-rbac</module>
     </modules>
 
 </project>
