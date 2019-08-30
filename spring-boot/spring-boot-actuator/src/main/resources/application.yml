@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/bhz
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+#启用所有的监控端点，默认情况下，这些端点是禁止的，默认只有3个端点
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+
+
