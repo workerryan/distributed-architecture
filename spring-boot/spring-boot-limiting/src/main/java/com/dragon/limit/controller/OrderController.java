@@ -17,7 +17,7 @@ public class OrderController {
     }
 
     /** create 方法中传入一个参数，这个参数是以每秒为单位固定的速率值，当传入的值为1的时候，就表示 1r/s 每秒中往桶中存入一个令牌
-     * 这是一个独立线程
+     * 这是一个独立线程，是以每次访问进行限制的
      * */
     private RateLimiter rateLimiter = RateLimiter.create(1);
 
