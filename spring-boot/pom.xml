@@ -21,6 +21,7 @@
         <module>spring-boot-manual-myself</module>
         <module>spring-boot-security</module>
         <module>spring-boot-security-rbac</module>
+        <module>spring-boot-limiting</module>
     </modules>
 
 </project>
