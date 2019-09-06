@@ -1,5 +1,6 @@
 package com.dragon.limit.controller;
 
+import com.dragon.limit.aop.ExtRateLimiter;
 import com.dragon.limit.service.OrderService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -45,4 +46,13 @@ public class OrderController {
         }
         return "抢购失败!";
     }
+
+
+    @RequestMapping("/findIndex")
+    @ExtRateLimiter(permitsPerSecond = 1.0, timeout = 500)
+    public String findIndex(){
+        System.out.println("findIndex " + System.currentTimeMillis());
+        return "yes";
+    }
+
 }
