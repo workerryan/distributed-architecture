@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.google.common.util.concurrent.RateLimiter;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.concurrent.TimeUnit;
 
 @RestController
@@ -53,6 +54,14 @@ public class OrderController {
     public String findIndex(){
         System.out.println("findIndex " + System.currentTimeMillis());
         return "yes";
+    }
+
+
+    @RequestMapping("/escape")
+    public String escape(HttpServletRequest requst){
+        String data = requst.getParameter("data");
+        System.out.println("data " + data);
+        return data;
     }
 
 }

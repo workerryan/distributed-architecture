@@ -11,7 +11,10 @@
 
     <artifactId>spring-boot-limiting</artifactId>
 
-    <description>通过guava实现限流</description>
+    <description>
+        1、通过guava实现限流
+        2、通过过滤器实现特殊字符的过滤
+    </description>
 
     <dependencies>
         <dependency>
@@ -27,6 +30,12 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.4</version>
         </dependency>
     </dependencies>
 </project>

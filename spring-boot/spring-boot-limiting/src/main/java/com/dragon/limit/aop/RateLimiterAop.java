@@ -36,8 +36,8 @@ import com.google.common.util.concurrent.RateLimiter;
 public class RateLimiterAop {
 	private Map<String, RateLimiter> rateHashMap = new ConcurrentHashMap<>();
 
-	/** 定义切入点*/
-	@Pointcut("execution(public * com.dragon.limit.*.*(..))")
+	/** 定义切入点，需要注意的是这里切入点表达式的包后面的2个点，否则会存在不能切入的bug*/
+	@Pointcut("execution(public * com.dragon.limit..*.*(..))")
 	public void rlAop() {
 	}
  	/** 使用AOP环绕通知判断拦截所有springmvc 请求，判断请求方法上是否存在ExtRateLimiter注解*/
