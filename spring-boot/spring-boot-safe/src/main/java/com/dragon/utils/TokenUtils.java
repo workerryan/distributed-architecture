@@ -2,7 +2,9 @@ package com.dragon.utils;
 
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.Iterator;
 import java.util.Map;
+import java.util.Properties;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class TokenUtils {
@@ -27,5 +29,4 @@ public class TokenUtils {
         tokenMaps.remove(tokenKey);
         return true;
     }
-
 }
