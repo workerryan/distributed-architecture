@@ -23,6 +23,7 @@
         <module>spring-boot-security-rbac</module>
         <module>spring-boot-limiting</module>
         <module>spring-boot-safe</module>
+        <module>spring-boot-oauth2-server</module>
     </modules>
 
 </project>
