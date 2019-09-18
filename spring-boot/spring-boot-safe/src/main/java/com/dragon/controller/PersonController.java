@@ -1,8 +1,10 @@
 package com.dragon.controller;
 
+import com.dragon.aop.ExtApiIdempotent;
 import com.dragon.entity.Person;
 import com.dragon.service.PersonService;
 import com.dragon.service.RedisToken;
+import com.dragon.utils.ConstantUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -41,6 +43,13 @@ public class PersonController {
             return "请勿重复提交";
         }
 
+        personService.save(person);
+        return "yes";
+    }
+
+    @ExtApiIdempotent(type = ConstantUtils.EXTAPIHEAD)
+    @RequestMapping("/person/save/v2")
+    public String savev2( @RequestBody Person person){
         personService.save(person);
         return "yes";
     }
