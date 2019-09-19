@@ -10,12 +10,12 @@ import org.apache.ibatis.annotations.Update;
  * @since 1.0.0
  */
 public interface AppMapper {
-    @Select("SELECT ID AS ID ,APP_NAME AS appName, app_id as appId, app_secret as appSecret ,is_flag as isFlag , access_token as accessToken " +
+    @Select("SELECT ID AS ID ,APP_NAME AS appName, app_id as appId, app_secret as appSecret ,is_flag as isFlag, access_token as accessToken " +
             "from m_app " +
             "where app_id=#{appId} and app_secret=#{appSecret} ")
     AppEntity findApp(AppEntity appEntity);
 
-    @Select("SELECT ID AS ID ,APP_NAME AS appName, app_id as appId, app_secret as appSecret ,is_flag as isFlag  access_token as accessToken " +
+    @Select("SELECT ID AS ID ,APP_NAME AS appName, app_id as appId, app_secret as appSecret ,is_flag as isFlag, access_token as accessToken " +
             "from m_app " +
             "where app_id=#{appId}")
     AppEntity findAppId(@Param("appId") String appId);
