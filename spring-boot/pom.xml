@@ -24,6 +24,7 @@
         <module>spring-boot-limiting</module>
         <module>spring-boot-safe</module>
         <module>spring-boot-oauth2-server</module>
+        <module>spring-boot-cache</module>
     </modules>
 
 </project>

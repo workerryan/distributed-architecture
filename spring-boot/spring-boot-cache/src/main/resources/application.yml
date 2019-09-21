@@ -18,7 +18,7 @@ spring:
     static-path-pattern: /static/**
 
   datasource:
-    url: jdbc:mysql://192.168.0.10:3306/ik?useUnicode=true&characterEncoding=UTF-8
+    url: jdbc:mysql://192.168.0.10:3306/mybatis?useUnicode=true&characterEncoding=UTF-8
     username: pck
     password: Pck@*123
     driver-class-name: com.mysql.jdbc.Driver
@@ -40,17 +40,5 @@ spring:
         min-idle: 0
     timeout: 10000
 
-
-### 下面是微信的配置信息
-wx:
-  appid: wx2e91213325c5fde1
-  secret: c0a5930dd5b70dc04c6eade059bf3cf7
-  redirectUri: http://127.0.0.1:8080/wx/callback
-  ### 生成微信授权
-  authorizedUrl: https://open.weixin.qq.com/connect/oauth2/authorize?appid=APPID&redirect_uri=REDIRECT_URI&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect
-  ###获取code后，请求以下链接获取access_token
-  access_token: https://api.weixin.qq.com/sns/oauth2/access_token?appid=APPID&secret=SECRET&code=CODE&grant_type=authorization_code
-  ###拉取用户信息(需scope为 snsapi_userinfo)
-  userinfo: https://api.weixin.qq.com/sns/userinfo?access_token=ACCESS_TOKEN&openid=OPENID&lang=zh_CN
 
 
