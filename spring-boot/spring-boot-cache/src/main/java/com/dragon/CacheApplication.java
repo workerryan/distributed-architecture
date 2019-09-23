@@ -1,4 +1,4 @@
-package com.dragon.cache;
+package com.dragon;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
