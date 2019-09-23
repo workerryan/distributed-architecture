@@ -41,7 +41,7 @@ public class ZookeeperDistrbuteLock extends ZookeeperAbstractLock {
                 e.printStackTrace();
             }
         }
-        // 删除监听
+        // 删除监听，waitLock()会重复多次，所以这里要删除监听，为了避免监听多次
         zkClient.unsubscribeDataChanges(PATH, izkDataListener);
     }
 }
