@@ -1,0 +1,18 @@
+server:
+  port: 8001
+spring:
+  application:
+    name: spring-boot-apollo-client
+
+eureka:
+  client:
+    service-url:
+      ## 这里的eureka地址就是在启动apollo的时候，apollo创建的eureka地址
+      defaultZone: http://localhost:8080/eureka
+
+  instance:
+    hostname: spring-boot-apollo-client
+    prefer-ip-address: true
+    instance-id:  ${spring.cloud.client.ip-address}:${server.port}
+
+env: DEV
