@@ -1,0 +1,12 @@
+dubbo:
+  application:
+    name: member
+  # dubbo协议及其端口号只需要在生产者端配置
+  protocol:
+    name: dubbo
+    # 如果要部署多个服务，那么这个服务的端口在同一台机器上不一样就可以了
+    port: 20881
+  registry:
+    address: zookeeper://127.0.0.1:2181
+#  scan:
+#    base-packages: com.dragon.dubbo

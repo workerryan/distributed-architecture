@@ -11,6 +11,13 @@
 
     <artifactId>spring-cloud</artifactId>
 
+    <packaging>pom</packaging>
+    <modules>
+        <module>spring-cloud-eureka</module>
+        <module>spring-cloud-common</module>
+        <module>spring-cloud-lcn</module>
+    </modules>
+
     <properties>
         <java.version>1.8</java.version>
         <spring-cloud.version>Greenwich.SR1</spring-cloud.version>
