@@ -17,6 +17,7 @@ public class Customer {
         // 2.获取通道
         Channel channel = newConnection.createChannel();
         channel.queueDeclare(Producer.QUEUE_NAME, false, false, false, null);
+        channel.basicQos(1);
         DefaultConsumer defaultConsumer = new DefaultConsumer(channel) {
             @Override
             public void handleDelivery(String consumerTag, Envelope envelope, AMQP.BasicProperties properties, byte[] body)
@@ -27,8 +28,7 @@ public class Customer {
                 channel.basicAck(envelope.getDeliveryTag(), true);
             }
         };
-        // 3.监听队列
+        // 3.监听队列，第2个参数为false就是手动应答
         channel.basicConsume(Producer.QUEUE_NAME, false, defaultConsumer);
-
     }
 }
