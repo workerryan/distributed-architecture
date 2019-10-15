@@ -10,3 +10,32 @@ spring:
     password: guest
    ### 地址
     virtual-host: /demo-virtual-hosts
+    ## 开启消息确认机制，默认为false
+    publisher-confirms: true
+    publisher-returns: true
+
+    listener:
+      simple:
+        retry:
+          # 开启消费者重试，默认为true
+          enabled: true
+          # 最大重试次数，默认是无限次，重试3次还是失败，那么就会删除该消息
+          # 重试3次，仍然失败，那么MQ会删除该消息，这时候应该把消息存入死信队列
+          max-attempts: 3
+          # 重试间隔次数，这里配置的是3秒
+          initial-interval: 3000
+          # 开启手动应答，默认是自动应答
+        acknowledge-mode: manual
+
+
+
+
+
+  datasource:
+    name: test
+    url: jdbc:mysql://127.0.0.1:3306/bhz
+    username: root
+    password: 123456
+    # druid 连接池
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver

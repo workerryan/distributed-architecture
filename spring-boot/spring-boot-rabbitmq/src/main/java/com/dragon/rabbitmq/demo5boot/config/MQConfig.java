@@ -1,11 +1,11 @@
 package com.dragon.rabbitmq.demo5boot.config;
 
-import org.springframework.amqp.core.Binding;
-import org.springframework.amqp.core.BindingBuilder;
-import org.springframework.amqp.core.FanoutExchange;
-import org.springframework.amqp.core.Queue;
+import org.springframework.amqp.core.*;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.context.annotation.Bean;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author wanglei
@@ -21,10 +21,24 @@ public class MQConfig {
 
     private final static String EXCHANGE_NAME = "fanout_exchange";
 
-    /** 1.定义队列邮件*/
+    /** 死信队列 交换机标识符 */
+    public static final String DEAD_LETTER_QUEUE_KEY = "x-dead-letter-exchange";
+    /** 死信队列交换机绑定键标识符 */
+    public static final String DEAD_LETTER_ROUTING_KEY = "x-dead-letter-routing-key";
+
+    /** 定义死信队列相关信息 */
+    public final static String deadQueueName = "dead_queue";
+    public final static String deadRoutingKey = "dead_routing_key";
+    public final static String deadExchangeName = "dead_exchange";
+
+    /** 1.定义队列邮件，同时将该队列绑定到死信队列交换机上*/
     @Bean
     public Queue fanOutEmailQueue() {
-        return new Queue(FANOUT_EMAIL_QUEUE);
+        // 将普通队列绑定到死信队列交换机上
+        Map<String, Object> args = new HashMap<>(2);
+        args.put(DEAD_LETTER_QUEUE_KEY, deadExchangeName);
+        args.put(DEAD_LETTER_ROUTING_KEY, deadRoutingKey);
+        return new Queue(FANOUT_EMAIL_QUEUE, true, false, false, args);
     }
 
     @Bean
@@ -48,5 +62,25 @@ public class MQConfig {
     @Bean
     Binding bindingExchangeSms(Queue fanOutSmsQueue, FanoutExchange fanoutExchange) {
         return BindingBuilder.bind(fanOutSmsQueue).to(fanoutExchange);
+    }
+
+    /**
+     * 配置死信队列
+     *
+     * @return
+     */
+    @Bean
+    public Queue deadQueue() {
+        return new Queue(deadQueueName, true);
+    }
+
+    @Bean
+    public DirectExchange deadExchange() {
+        return new DirectExchange(deadExchangeName);
+    }
+
+    @Bean
+    public Binding bindingDeadExchange(Queue deadQueue, DirectExchange deadExchange) {
+        return BindingBuilder.bind(deadQueue).to(deadExchange).with(deadRoutingKey);
     }
 }

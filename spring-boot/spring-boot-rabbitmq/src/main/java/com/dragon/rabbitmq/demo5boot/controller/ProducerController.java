@@ -15,8 +15,8 @@ public class ProducerController {
     private FanoutProducer fanoutProducer;
 
     @RequestMapping("/sendFanout")
-    public String sendFanout(String queueName) {
-        fanoutProducer.send(queueName);
+    public String sendFanout(String queueName, int num) {
+        fanoutProducer.send(queueName, num);
         return "success";
     }
 
