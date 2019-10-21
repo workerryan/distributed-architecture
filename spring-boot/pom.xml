@@ -29,6 +29,7 @@
         <module>spring-boot-xxl-job-client</module>
         <module>spring-boot-apollo-client</module>
         <module>spring-boot-rabbitmq</module>
+        <module>spring-boot-es</module>
     </modules>
 
 </project>

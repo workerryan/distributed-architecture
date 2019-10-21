@@ -1,0 +1,14 @@
+spring:
+  data:
+    elasticsearch:
+    ####集群名称
+     cluster-name: my-application
+    ####地址 
+     cluster-nodes: localhost:9300
+  elasticsearch:
+    rest:
+      uris: http://localhost:9200
+
+
+
+

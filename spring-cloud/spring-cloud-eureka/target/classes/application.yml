@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: EUREKA
+server:
+  port: 30001
+
+eureka:
+  instance:
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+    hostname: eureka
+
+  server:
+    enable-self-preservation: false
+    eviction-interval-timer-in-ms: 1000
+
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:30001/eureka/
+    register-with-eureka: false
+    fetch-registry: false
+

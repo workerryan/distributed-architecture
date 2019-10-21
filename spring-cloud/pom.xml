@@ -16,6 +16,7 @@
         <module>spring-cloud-eureka</module>
         <module>spring-cloud-common</module>
         <module>spring-cloud-lcn</module>
+        <module>spring-cloud-zipkin-client</module>
     </modules>
 
     <properties>
