@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: EUREKA
+
+###服务端口号
+server:
+  port: 8100
+###eureka 基本信息配置
+eureka:
+  instance:
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+    hostname: eureka
+
+  server:
+    enable-self-preservation: false
+    eviction-interval-timer-in-ms: 1000
+
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8100/eureka/
+    register-with-eureka: false
+    fetch-registry: false
+
