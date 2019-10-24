@@ -9,13 +9,12 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>shop-basic</artifactId>
-
-    <description>基础工程</description>
-    <modules>
-        <module>shop-basics-springcloud-eureka</module>
-        <module>shop-basics-springcloud-zuul</module>
-    </modules>
+    <artifactId>shop-api-entity-api</artifactId>
 
     <packaging>pom</packaging>
+    <modules>
+        <module>shop-api-entity-api-weixin-entity</module>
+    </modules>
+
+
 </project>

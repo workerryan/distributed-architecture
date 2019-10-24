@@ -9,13 +9,24 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>shop-basic</artifactId>
+    <artifactId>shop-service-api</artifactId>
 
-    <description>基础工程</description>
+    <description>服务的公共服务</description>
     <modules>
-        <module>shop-basics-springcloud-eureka</module>
-        <module>shop-basics-springcloud-zuul</module>
+        <module>shop-service-api-weixin</module>
+        <module>shop-service-api-member</module>
     </modules>
 
     <packaging>pom</packaging>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.spring4all</groupId>
+            <artifactId>swagger-spring-boot-starter</artifactId>
+            <version>1.7.0.RELEASE</version>
+        </dependency>
+
+
+    </dependencies>
+
 </project>

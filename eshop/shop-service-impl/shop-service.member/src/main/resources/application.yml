@@ -1,0 +1,29 @@
+eureka:
+  instance:
+    hostname: app-member
+    prefer-ip-address: true
+    instance-id:  ${spring.cloud.client.ip-address}:${server.port}
+
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8100/eureka/
+
+server:
+  port: 8300
+
+spring:
+  application:
+    name: app-member
+
+
+####swagger相关配置
+swagger:
+  base-package: com.shop.member.service
+  title: SpringCloud2.x案例
+  description: 该项目“基于SpringCloud2.x构建微服务电商项目。
+  version: 1.1
+  terms-of-service-url: www.dragon.com
+  contact:
+    name: Workerryan@126.com
+    email: xx@qq.com
+

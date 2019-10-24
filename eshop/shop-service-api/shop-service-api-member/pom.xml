@@ -3,19 +3,20 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>eshop</artifactId>
+        <artifactId>shop-service-api</artifactId>
         <groupId>com.dragon</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>shop-basic</artifactId>
+    <artifactId>shop-service-api-member</artifactId>
 
-    <description>基础工程</description>
-    <modules>
-        <module>shop-basics-springcloud-eureka</module>
-        <module>shop-basics-springcloud-zuul</module>
-    </modules>
 
-    <packaging>pom</packaging>
+    <dependencies>
+        <dependency>
+            <groupId>com.dragon</groupId>
+            <artifactId>shop-service-api-weixin</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 </project>
