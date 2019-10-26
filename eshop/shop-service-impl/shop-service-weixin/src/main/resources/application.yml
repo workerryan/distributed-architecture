@@ -1,29 +1,6 @@
-eureka:
-  instance:
-    hostname: app-weixin
-    prefer-ip-address: true
-    instance-id:  ${spring.cloud.client.ip-address}:${server.port}
+app:
+  id: app-weixin
 
-  client:
-    serviceUrl:
-      defaultZone: http://localhost:8100/eureka/
-
-server:
-  port: 8200
-
-spring:
-  application:
-    name: app-weixin
-
-
-####swagger相关配置
-swagger:
-  base-package: com.shop.weixin.service
-  title: SpringCloud2.x案例
-  description: 该项目“基于SpringCloud2.x构建微服务电商项目。
-  version: 1.1
-  terms-of-service-url: www.dragon.com
-  contact:
-    name: Workerryan@126.com
-    email: xx@qq.com
+apollo:
+  meta: http://www.dragon.com:8080
 

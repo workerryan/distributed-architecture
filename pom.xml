@@ -16,11 +16,22 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>spring-boot</module>
-        <module>spring-cloud</module>
+<!--        <module>spring-cloud</module>-->
         <module>dubbo</module>
         <module>eshop</module>
     </modules>
 
     <packaging>pom</packaging>
+
+    <distributionManagement>
+        <repository>
+            <id>ryan-release</id>
+            <url>http://localhost:8081/repository/shop-release/</url>
+        </repository>
+        <snapshotRepository>
+            <id>ryan-snapshot</id>
+            <url>http://localhost:8081/repository/shop-snapshot/</url>
+        </snapshotRepository>
+    </distributionManagement>
 
 </project>
