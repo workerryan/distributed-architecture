@@ -12,16 +12,16 @@
     <artifactId>shop-service.member</artifactId>
 
     <dependencies>
-        <!-- member调用weixin -->
         <dependency>
             <groupId>com.dragon</groupId>
             <version>1.0-SNAPSHOT</version>
             <artifactId>shop-service-api-member</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-openfeign</artifactId>
-        </dependency>
 
+        <dependency>
+            <groupId>com.dragon</groupId>
+            <version>1.0-SNAPSHOT</version>
+            <artifactId>shop-service-api-weixin</artifactId>
+        </dependency>
     </dependencies>
 </project>

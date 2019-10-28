@@ -3,4 +3,6 @@ app:
 
 apollo:
   meta: http://www.dragon.com:8080
-
+  bootstrap:
+    enabled: true
+    namespaces: application,weixin,redis,mysql

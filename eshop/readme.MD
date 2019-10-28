@@ -66,12 +66,13 @@ swagger.contact.email = xx@qq.com
 
 要让客户端集成，需要引入jar
 
-```xml
+```
 <dependency>
     <groupId>com.ctrip.framework.apollo</groupId>
     <artifactId>apollo-core</artifactId>
     <version>1.5.0</version>
 </dependency>
+
 <dependency>
     <groupId>com.ctrip.framework.apollo</groupId>
     <artifactId>apollo-client</artifactId>
@@ -170,13 +171,141 @@ Auto update apollo changed value successfully, new value: dragonName, key: weixi
 
 可以看到自定义的配置发布后可以立即生效。这是因为集成了客户端之后，会有个监听器去监听。而原生的配置并没有监听，所以不会立即生效。
 
+### 1.2.3、Zuul网关整合，动态搭建Swagger
 
+1、先将Zuul整合Apollo
 
+2、整理Swagger的json文件
 
+```
+zuu.swagger.document = [
+    {
+        "name": "app-member",
+        "location": "/app-member/v2/api-docs",
+        "version": "2.0"
+    },
+    {
+        "name": "app-weixin",
+        "location": "/app-weixin/v2/api-docs",
+        "version": "2.0"
+    }
+]
+```
 
+3、动态刷新文档
 
+```java
+@SpringBootApplication
+@EnableEurekaClient
+@EnableZuulProxy
+@EnableSwagger2Doc
+@EnableApolloConfig
+public class ZuulApplication {
+    /** 获取到的ApolloConfig */
+    @ApolloConfig
+    private Config appConfig;
 
+    public static void main(String[] args) {
+        SpringApplication.run(ZuulApplication.class,args);
+    }
 
+    /** 添加文档来源，每个服务都要继承swagger，网关相当于是一个收集者，
+     *  当页面访问swagger-ui的时候，就会进入该代码 */
+    @Component
+    @Primary
+    class DocumentationConfig implements SwaggerResourcesProvider {
+        @Override
+        public List<SwaggerResource> get() {
+            // 开启监听，配置文件发生改变需要更改，如果发生了改变，那么就继续调用该方法
+            appConfig.addChangeListener(new ConfigChangeListener() {
+                @Override
+                public void onChange(ConfigChangeEvent changeEvent) {
+                    get();
+                }
+            });
+            return resources();
+        }
+
+        /** 从阿波罗服务器中获取resources */
+        private List<SwaggerResource> resources() {
+            List<SwaggerResource> resources = new ArrayList<>();
+            //网关使用服务别名获取远程服务的SwaggerApi，
+            //当没有获取到zuu.swagger.document的时候，默认值为空字符串
+            String swaggerDocJson = appConfig.getProperty("zuu.swagger.document", "");
+            JSONArray jsonArray = JSONArray.parseArray(swaggerDocJson);
+            for (Object object : jsonArray) {
+                JSONObject jsonObject = (JSONObject) object;
+                String name = jsonObject.getString("name");
+                String location = jsonObject.getString("location");
+                resources.add(swaggerResource(name, location));
+            }
+            return resources;
+        }
+
+        /**
+         * 添加服务的文档地址
+         * @param name      服务的注册名称
+         * @param location  文档地址，第一部分是接口的地址
+         */
+        private SwaggerResource  swaggerResource(String name, String location) {
+            SwaggerResource swaggerResource = new SwaggerResource();
+            swaggerResource.setName(name);
+            swaggerResource.setLocation(location);
+            swaggerResource.setSwaggerVersion("2.0");
+            return swaggerResource;
+        }
+    }
+}
+```
+
+经过了上面的配置，就达到了动态配置swagger地址的功能。当刷新swagger页面的时候，就会去获取最新的数据。
+
+# 2、微信公众号开发
+
+要开发微信公众号，首先要有个公众号，可以去`https://mp.weixin.qq.com/debug/cgi-bin/sandbox?t=sandbox/login`申请一个测试公众号。
+
+开发公众号的时候，我们使用一个开源的框架 [WxJava](https://github.com/Wechat-Group/WxJava)
+
+1、接口配置信息
+
+首先要配置的是接口信息
+
+![4、接口配置-1](pic/4、接口配置-1.png)
+
+初始的时候，这里面是没有内容的，我们需要配置一个可访问的URL（可以使用花生壳）。配置这个地址是目的是为了和微信公众号每次做交互的时候，要进行验证。
+
+我们在`shop-service-weixin`项目里面引入WxJava的GAV:	
+
+```
+<dependency>
+    <groupId>com.github.binarywang</groupId>
+    <artifactId>wx-java-mp-spring-boot-starter</artifactId>
+    <version>3.5.0</version>
+</dependency>
+<dependency>
+    <groupId>redis.clients</groupId>
+    <artifactId>jedis</artifactId>
+</dependency>
+```
+
+需要注意的是，这里需要加入jedis的包。
+
+然后将`https://gitee.com/binary/weixin-java-mp-demo`里面的代码copy到`src/main/java`下面，然后在`application.yml`中进行配置：
+
+```yml
+wx:
+  mp:
+    configs:
+      - appId: wx2e91213325c5fde1 #（一个公众号的appid）
+        secret: c0a5930dd5b70dc04c6eade059bf3cf7 #（公众号的appsecret）
+        token: dragon #（接口配置里的Token值）
+```
+
+然后启动项目，通过花生壳映射外网。在上面的接口配置文档里面配置url和token：
+
+![4、wx接口配置-2](pic/4、wx接口配置-2.png)
+
+就可以了。可以看到已经验证成功了。
 
 
 
