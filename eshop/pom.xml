@@ -18,6 +18,7 @@
         <module>shop-api-entity-api</module>
         <module>shop-service-impl</module>
         <module>shop-common</module>
+        <module>shop-portal</module>
     </modules>
 
     <packaging>pom</packaging>

@@ -1,3 +1,5 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
 com.shop.common.core.utils.RedisUtil,\
-com.shop.common.core.error.GlobalExceptionHandler
+com.shop.common.core.error.GlobalExceptionHandler,\
+com.shop.common.core.transaction.RedisDataSoureceTransaction,\
+com.shop.common.core.token.GenerateToken

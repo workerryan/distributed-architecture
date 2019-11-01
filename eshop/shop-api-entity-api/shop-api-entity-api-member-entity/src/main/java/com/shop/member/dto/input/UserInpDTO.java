@@ -4,6 +4,9 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+/**
+ * 用户注册信息
+ */
 @Data
 @ApiModel(value = "用户信息实体类")
 public class UserInpDTO {

@@ -8,6 +8,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,12 +25,16 @@ import me.chanjar.weixin.mp.bean.message.WxMpXmlOutMessage;
  * @author Binary Wang(https://github.com/binarywang)
  */
 @Slf4j
-@AllArgsConstructor
 @RestController
 @RequestMapping("/wx/portal/{appid}")
 public class WxPortalController {
     private final WxMpService wxService;
     private final WxMpMessageRouter messageRouter;
+
+    public WxPortalController(WxMpService wxService, WxMpMessageRouter messageRouter) {
+        this.wxService = wxService;
+        this.messageRouter = messageRouter;
+    }
 
     @GetMapping(produces = "text/plain;charset=utf-8")
     public String authGet(@PathVariable String appid,
