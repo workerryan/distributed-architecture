@@ -44,7 +44,6 @@ public class IndexController extends BaseWebController {
 		}
 		return INDEX_FTL;
 	}
-	// 作业题：完成退出功能 实现唯一登陆心跳检测 前端定时器 定时 使用js 读取本地cookie 信息 使用token 查询当前状态 如果token状态为1的话，页面直接刷新下。
 
 	@RequestMapping(value = "/exit")
 	public String exit(HttpServletRequest request, HttpServletResponse response, Model model){

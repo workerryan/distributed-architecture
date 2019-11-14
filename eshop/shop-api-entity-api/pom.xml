@@ -15,6 +15,7 @@
     <modules>
         <module>shop-api-entity-api-weixin-entity</module>
         <module>shop-api-entity-api-member-entity</module>
+        <module>shop-api-entity-api-product-entity</module>
     </modules>
 
     <dependencies>

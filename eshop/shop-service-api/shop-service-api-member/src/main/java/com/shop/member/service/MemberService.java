@@ -1,6 +1,7 @@
 package com.shop.member.service;
 
 import com.shop.common.core.base.entity.BaseResponse;
+import com.shop.member.dto.input.UserLoginInpDTO;
 import com.shop.member.dto.output.UserOutDTO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -8,6 +9,7 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 /**
@@ -31,4 +33,10 @@ public interface MemberService {
     @GetMapping("/getUserInfo")
     @ApiOperation(value = "/getUserInfo")
     BaseResponse<UserOutDTO> getInfo(@RequestParam("token") String token);
+
+    /**
+     * SSO认证系统登陆接口
+     */
+    @PostMapping("/ssoLogin")
+    BaseResponse<UserOutDTO> ssoLogin(@RequestBody UserLoginInpDTO userLoginInpDTO);
 }

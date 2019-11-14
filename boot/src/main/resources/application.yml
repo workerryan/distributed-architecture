@@ -1,2 +1,13 @@
 server:
   port: 8080
+
+
+app:
+  id: app-weixin
+
+apollo:
+  meta: http://www.dragon.com:30014
+  bootstrap:
+    enabled: true
+    namespaces: application,weixin,redis,mysql
+

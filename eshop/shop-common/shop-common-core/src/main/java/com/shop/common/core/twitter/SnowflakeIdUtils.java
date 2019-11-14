@@ -1,11 +1,7 @@
 package com.shop.common.core.twitter;
 
 /**
- *
- * 
- * 
- * @description: 使用雪花算法生成全局id
-
+ * 使用雪花算法生成全局id
  */
 public class SnowflakeIdUtils {
 	private static SnowflakeIdWorker idWorker;

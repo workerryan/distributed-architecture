@@ -15,6 +15,8 @@
     <modules>
         <module>shop-service-api-weixin</module>
         <module>shop-service-api-member</module>
+        <module>shop-service-api-pay</module>
+        <module>shop-service-api-goods</module>
     </modules>
 
     <packaging>pom</packaging>

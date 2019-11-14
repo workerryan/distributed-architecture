@@ -36,3 +36,6 @@ xxl.job.executor.logretentiondays=-1
 - 增加config类，见`com.dragon.xxlclient.config.XxlJobConfig`
 - 书写handler类，该类要继承`com.xxl.job.core.handler.IJobHandler`,在该类上增加`@JobHandler(value="myJobHandler")`注解，xxl使用反射，所以该注解里面value的值为类型名称，第一个字符小写
 
+XXLJOB的原理是客户端和服务端通过Netty建立通信，任务是在服务端执行的，服务端通过Cron表达式执行，然后通过注册上来的客户端地址进行选择策略（轮询或者随机）选择一台服务器将执行的请求转发到客户端执行。<br>
+就相当于服务端执行了带动客户端执行，从而达到分布式的任务调度。<br>
+Admin平台不执行业务逻辑，只是辅助开始执行，然后转发到客户端执行

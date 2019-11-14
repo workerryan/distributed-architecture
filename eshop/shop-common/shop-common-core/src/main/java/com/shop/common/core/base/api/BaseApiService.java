@@ -43,4 +43,8 @@ public class BaseApiService<T> {
 	public boolean toDaoResult(int result){
 		return result > 0;
 	}
+
+	protected boolean isSuccess(BaseResponse baseResponse){
+		return baseResponse.getCode().equals(Constants.HTTP_RES_CODE_200);
+	}
 }

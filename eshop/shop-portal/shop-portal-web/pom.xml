@@ -15,20 +15,22 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-freemarker</artifactId>
+            <groupId>org.springframework.session</groupId>
+            <artifactId>spring-session-data-redis</artifactId>
         </dependency>
-
         <dependency>
-            <groupId>com.dragon</groupId>
-            <version>1.0-SNAPSHOT</version>
-            <artifactId>shop-common-core</artifactId>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-pool2</artifactId>
         </dependency>
-
         <dependency>
-            <groupId>com.dragon</groupId>
-            <version>1.0-SNAPSHOT</version>
-            <artifactId>shop-service-api-member</artifactId>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+        </dependency>
+        <!-- sso core -->
+        <dependency>
+            <groupId>com.xuxueli</groupId>
+            <artifactId>xxl-sso-core</artifactId>
+            <version>1.1.1-SNAPSHOT</version>
         </dependency>
 
         <dependency>

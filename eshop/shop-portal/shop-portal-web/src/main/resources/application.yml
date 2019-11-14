@@ -19,7 +19,27 @@ spring:
 eureka:
   client:
     service-url:
-           defaultZone: http://localhost:8080/eureka
+       defaultZone: http://localhost:8100/eureka/
 
 server:
     port: 9000
+
+redis:
+  hostname: 127.0.0.1
+  port: 6379
+ # password: 123456
+
+
+xxl-sso:
+  excluded:
+    paths:
+xxl:
+  sso:
+    server: http://xxlssoserver.com:8000/xxl-sso-server
+    logout:
+      path: /logout
+    redis:
+      address: redis://127.0.0.1:6379
+
+
+

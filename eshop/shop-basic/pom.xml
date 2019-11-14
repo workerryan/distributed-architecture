@@ -15,6 +15,7 @@
     <modules>
         <module>shop-basics-springcloud-eureka</module>
         <module>shop-basics-springcloud-zuul</module>
+        <module>shop-basics-xxl-sso-server</module>
     </modules>
 
     <packaging>pom</packaging>
