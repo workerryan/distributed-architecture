@@ -30,6 +30,9 @@ public class AuthController extends BaseApiController {
         this.baseRedisService = baseRedisService;
     }
 
+    /**
+     * 根据appId和APPSecurity获取token
+     */
     @RequestMapping("/accessToken")
     public ResponseBase getAccessToken(AppEntity appEntity) {
         AppEntity appResult = appMapper.findApp(appEntity);

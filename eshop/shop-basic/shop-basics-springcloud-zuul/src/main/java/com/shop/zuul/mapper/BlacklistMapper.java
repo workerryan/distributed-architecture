@@ -1,5 +1,6 @@
-package com.shop.zuul.mapper.entity;
+package com.shop.zuul.mapper;
 
+import com.shop.zuul.mapper.entity.Blacklist;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 

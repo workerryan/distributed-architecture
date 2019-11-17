@@ -3,7 +3,7 @@ package com.shop.zuul.build;
 import com.netflix.zuul.context.RequestContext;
 import com.shop.common.core.utils.SignUtil;
 import com.shop.zuul.mapper.entity.Blacklist;
-import com.shop.zuul.mapper.entity.BlacklistMapper;
+import com.shop.zuul.mapper.BlacklistMapper;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
