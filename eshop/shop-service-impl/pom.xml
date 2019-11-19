@@ -18,6 +18,7 @@
         <module>shop-service-pay</module>
         <module>shop-service-goods</module>
         <module>shop-service-auth</module>
+        <module>shop-service.seckill</module>
     </modules>
 
     <dependencies>

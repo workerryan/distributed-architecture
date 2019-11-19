@@ -18,6 +18,7 @@
         <module>shop-service-api-pay</module>
         <module>shop-service-api-goods</module>
         <module>shop-service-api-auth</module>
+        <module>shop-service-api-seckill</module>
     </modules>
 
     <packaging>pom</packaging>
