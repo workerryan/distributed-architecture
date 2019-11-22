@@ -4,6 +4,8 @@ import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import com.netflix.zuul.exception.ZuulException;
 import com.shop.zuul.build.GatewayDirector;
+import com.shop.zuul.handler.GatewayHandler;
+import com.shop.zuul.handler.ResponsibilityClient;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,19 +23,26 @@ public class GatewayFilter extends ZuulFilter {
     @Autowired
     private GatewayDirector gatewayDirector;
 
+    @Autowired
+    private ResponsibilityClient responsibilityClient;
+
     @Override
     public Object run() throws ZuulException {
         RequestContext ctx = RequestContext.getCurrentContext();
         HttpServletRequest request = ctx.getRequest();
         HttpServletResponse response = ctx.getResponse();
         response.setContentType("UTF-8");
-        // 1.获取ip地址
+
+        GatewayHandler handler = responsibilityClient.getHandler();
+        handler.service(ctx, request, response);
+
+        /*// 1.获取ip地址
         String ipAddress = getIpAddr(request);
         gatewayDirector.direcot(ctx, ipAddress, response, request);
 
         //js代码过滤，防止XSS攻击
         Map<String, List<String>> parameters = filterParameters(request, ctx);
-        ctx.setRequestQueryParams(parameters);
+        ctx.setRequestQueryParams(parameters);*/
 
         return null;
     }

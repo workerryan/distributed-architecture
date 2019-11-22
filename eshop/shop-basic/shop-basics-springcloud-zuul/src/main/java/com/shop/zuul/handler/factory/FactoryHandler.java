@@ -17,7 +17,7 @@ public class FactoryHandler {
 
     /**
      * 封装所有的责任链启动方式，将每个Handler存放到集合中执行便利
-     * @return
+     * 这里后续需要放入数据库或者配置中心里面，以便能动态的调整执行顺序
      */
     public List<GatewayHandler> getAllHandler(){
         return Arrays.asList(SpringContextUtil.getBean(CurrentLimitHandler.class),

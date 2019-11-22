@@ -19,13 +19,14 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 @Slf4j
 public class CurrentLimitHandler extends BaseHandler implements GatewayHandler {
-	// 每秒时间存入令牌桶中Token为1个 1s/1r 写在分布式配置中心
+	/** 每秒时间存入令牌桶中Token为1个 1s/1r 写在分布式配置中心*/
 	private RateLimiter rateLimiter = RateLimiter.create(1);
 
 	@Override
 	public void service(RequestContext ctx, HttpServletRequest req, HttpServletResponse response) {
 		// 1.用户实现令牌桶限流
 		log.info(">>>第一关API接口限流>>>>>");
+		//timeout为阻塞等待超时的时间，0表示不等待，单位为秒
 		boolean tryAcquire = rateLimiter.tryAcquire(0, TimeUnit.SECONDS);
 		if (!tryAcquire) {
 			resultError(500, ctx, "当前排队人数过多,请稍后重试....");
