@@ -11,7 +11,6 @@ eureka:
 server:
   port: 9800
 
-
   
 spring:
   application:
@@ -32,4 +31,18 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://127.0.0.1:3306/shop_goods
 
-  
+
+  rabbitmq:
+    username: user
+    password: password
+    virtual-host: /
+    host: localhost
+    port: 5672
+    listener:
+      simple:
+        retry:
+          enabled: true
+          max-attempts: 5
+          initial-interval: 1000
+        acknowledge-mode: manual
+        default-requeue-rejected: false

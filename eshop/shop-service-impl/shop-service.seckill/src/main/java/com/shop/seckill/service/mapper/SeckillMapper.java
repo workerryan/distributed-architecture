@@ -9,16 +9,16 @@ import org.apache.ibatis.annotations.Update;
 public interface SeckillMapper {
 
 	@Select("SELECT seckill_id AS seckillId,name as name,inventory as inventory,start_time as startTime,end_time as endTime,create_time as createTime,version as version " +
-			"from meite_seckill where seckill_id=#{seckillId}")
+			"from meite_seckil where seckill_id=#{seckillId}")
 	SeckillEntity findBySeckillId(Long seckillId);
 
 
-	@Update("update meite_seckill " +
+	@Update("update meite_seckil " +
 			"set inventory=inventory-1, version=version+1 " +
 			"where  seckill_id=#{seckillId} and inventory>0  and version=#{version} ;")
 	int inventoryDeduction(@Param("seckillId") Long seckillId, @Param("version") Long version);
 
-	@Update("update meite_seckill set inventory=inventory-1, version=version+1 where  seckill_id=#{seckillId}  ")
+	@Update("update meite_seckil set inventory=inventory-1, version=version+1 where  seckill_id=#{seckillId}  ")
 	int modifyInventory(@Param("seckillId") Long seckillId, @Param("version") Long version);
 
 	// update meite_seckill set inventory=inventory-1 where

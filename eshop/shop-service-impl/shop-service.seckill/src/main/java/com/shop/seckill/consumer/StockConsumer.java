@@ -1,6 +1,7 @@
 package com.shop.seckill.consumer;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.Map;
 
 import com.shop.seckill.service.mapper.OrderMapper;
@@ -31,38 +32,43 @@ public class StockConsumer {
 	@Autowired
 	private OrderMapper orderMapper;
 
-	@RabbitListener(queues = "modify_inventory_queue")
+	/*@RabbitListener(queues = "modify_inventory_queue")
 	@Transactional
 	public void process(Message message, @Headers Map<String, Object> headers, Channel channel) throws IOException {
-		String messageId = message.getMessageProperties().getMessageId();
-		String msg = new String(message.getBody(), "UTF-8");
-		log.info(">>>messageId:{},msg:{}", messageId, msg);
-		JSONObject jsonObject = JSONObject.parseObject(msg);
-		// 1.获取秒杀id
-		Long seckillId = jsonObject.getLong("seckillId");
-		SeckillEntity seckillEntity = seckillMapper.findBySeckillId(seckillId);
-		if (seckillEntity == null) {
-			log.warn("seckillId:{},商品信息不存在!", seckillId);
-			return;
+		try {
+			String messageId = message.getMessageProperties().getMessageId();
+			String msg = new String(message.getBody(), "UTF-8");
+			log.info("[consumer] messageId:{},msg:{}", messageId, msg);
+			JSONObject jsonObject = JSONObject.parseObject(msg);
+			// 1.获取秒杀id
+			Long seckillId = jsonObject.getLong("seckillId");
+			SeckillEntity seckillEntity = seckillMapper.findBySeckillId(seckillId);
+			if (seckillEntity == null) {
+				log.warn("[consumer] seckillId:{},商品信息不存在!", seckillId);
+				return;
+			}
+			Long version = seckillEntity.getVersion();
+			int inventoryDeduction = seckillMapper.inventoryDeduction(seckillId, version);
+			if (!toDaoResult(inventoryDeduction)) {
+				log.info("[consumer] seckillId:{}修改库存失败>>>>inventoryDeduction返回为{} 秒杀失败！", seckillId, inventoryDeduction);
+				return;
+			}
+			// 2.添加秒杀订单
+			OrderEntity orderEntity = new OrderEntity();
+			String phone = jsonObject.getString("phone");
+			orderEntity.setUserPhone(phone);
+			orderEntity.setSeckillId(seckillId);
+			orderEntity.setState(1L);
+			int insertOrder = orderMapper.insertOrder(orderEntity);
+			if (!toDaoResult(insertOrder)) {
+				return;
+			}
+			log.info("[consumer] 修改库存成功seckillId:{}>>>>inventoryDeduction返回为{} 秒杀成功", seckillId, inventoryDeduction);
+		} catch (Exception e) {
+			log.error("[consumer] 消费失败", e);
+			channel.basicNack(message.getMessageProperties().getDeliveryTag(), false, false);
 		}
-		Long version = seckillEntity.getVersion();
-		int inventoryDeduction = seckillMapper.inventoryDeduction(seckillId, version);
-		if (!toDaoResult(inventoryDeduction)) {
-			log.info(">>>seckillId:{}修改库存失败>>>>inventoryDeduction返回为{} 秒杀失败！", seckillId, inventoryDeduction);
-			return;
-		}
-		// 2.添加秒杀订单
-		OrderEntity orderEntity = new OrderEntity();
-		String phone = jsonObject.getString("phone");
-		orderEntity.setUserPhone(phone);
-		orderEntity.setSeckillId(seckillId);
-		orderEntity.setState(1L);
-		int insertOrder = orderMapper.insertOrder(orderEntity);
-		if (!toDaoResult(insertOrder)) {
-			return;
-		}
-		log.info(">>>修改库存成功seckillId:{}>>>>inventoryDeduction返回为{} 秒杀成功", seckillId, inventoryDeduction);
-	}
+	}*/
 
 	// 调用数据库层判断
 	public Boolean toDaoResult(int result) {

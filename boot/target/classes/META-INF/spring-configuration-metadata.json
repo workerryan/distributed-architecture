@@ -1,0 +1,17 @@
+{
+  "groups": [
+    {
+      "name": "base",
+      "type": "com.dragon.config.BaseDictionay",
+      "sourceType": "com.dragon.config.BaseDictionay"
+    }
+  ],
+  "properties": [
+    {
+      "name": "base.dictionary",
+      "type": "java.util.List<java.lang.String>",
+      "sourceType": "com.dragon.config.BaseDictionay"
+    }
+  ],
+  "hints": []
+}

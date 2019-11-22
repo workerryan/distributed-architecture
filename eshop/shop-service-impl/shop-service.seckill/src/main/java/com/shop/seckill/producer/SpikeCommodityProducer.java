@@ -27,9 +27,8 @@ public class SpikeCommodityProducer implements RabbitTemplate.ConfirmCallback {
 
 	@Transactional
 	public void send(JSONObject jsonObject) {
-
 		String jsonString = jsonObject.toJSONString();
-		System.out.println("jsonString:" + jsonString);
+		log.info("[producer] 需要发生的消息为 " + jsonString);
 		String messAgeId = UUID.randomUUID().toString().replace("-", "");
 		// 封装消息
 		Message message = MessageBuilder.withBody(jsonString.getBytes())
@@ -40,21 +39,21 @@ public class SpikeCommodityProducer implements RabbitTemplate.ConfirmCallback {
 		this.rabbitTemplate.setConfirmCallback(this);
 		CorrelationData correlationData = new CorrelationData(jsonString);
 		rabbitTemplate.convertAndSend("modify_exchange_name", "modifyRoutingKey", message, correlationData);
-
 	}
 
 	// 生产消息确认机制 生产者往服务器端发送消息的时候，采用应答机制
 	@Override
 	public void confirm(CorrelationData correlationData, boolean ack, String cause) {
-		String jsonString = correlationData.getId();
-		System.out.println("消息id:" + correlationData.getId());
+		log.info("[producer] 消息id:" + correlationData.getId());
 		if (ack) {
-			log.info(">>>使用MQ消息确认机制确保消息一定要投递到MQ中成功");
+			log.info("[producer] 消息发送成功");
 			return;
 		}
+
+		String jsonString = correlationData.getId();
 		JSONObject jsonObject = JSONObject.parseObject(jsonString);
 		// 生产者消息投递失败的话，采用递归重试机制
 		send(jsonObject);
-		log.info(">>>使用MQ消息确认机制投递到MQ中失败");
+		log.info("[producer] 使用MQ消息确认机制投递到MQ中失败");
 	}
 }

@@ -74,14 +74,11 @@ public class SpikeCommodityServiceImpl extends BaseApiService<JSONObject> implem
 
 	// 结业项目中采用rabbitmq实现秒杀
 	/**
-	 * 面试官 都喜欢问 你们项目中在那些地方使用到多线程
+	 * 多线程生产token
 	 * 
-	 * @param seckillId
-	 * @param tokenQuantity
-	 * @return
+	 * @param seckillId        商品id
+	 * @param tokenQuantity    商品数量
 	 */
-
-	// 采用redis数据库类型为 list类型 key为 商品库存id list 多个秒杀token
 	@Override
 	public BaseResponse<JSONObject> addSpikeToken(Long seckillId, Long tokenQuantity) {
 		// 1.验证参数
