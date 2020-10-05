@@ -5,6 +5,7 @@ import java.util.concurrent.TimeUnit;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.shop.zuul.handler.GatewayHandler;
 import org.springframework.stereotype.Component;
 
@@ -36,5 +37,10 @@ public class CurrentLimitHandler extends BaseHandler implements GatewayHandler {
 		nextGatewayHandler.service(ctx, req, response);
 
 	}
+
+	public void skillFallback(){
+
+	}
+
 
 }

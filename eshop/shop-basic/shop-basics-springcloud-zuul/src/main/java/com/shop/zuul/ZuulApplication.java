@@ -11,6 +11,7 @@ import com.spring4all.swagger.EnableSwagger2Doc;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.cloud.netflix.hystrix.EnableHystrix;
 import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
@@ -29,6 +30,7 @@ import java.util.List;
 @EnableZuulProxy
 @EnableSwagger2Doc
 @EnableApolloConfig
+@EnableHystrix
 public class ZuulApplication {
     /** 获取到的ApolloConfig */
     @ApolloConfig
