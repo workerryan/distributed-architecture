@@ -1,6 +1,5 @@
 package com.dragon;
 
-import com.ctrip.framework.apollo.spring.annotation.EnableApolloConfig;
 import com.dragon.config.BaseDictionay;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
